@@ -11,6 +11,7 @@ public class Account
     private char acctType;
     private double balance;
     private String id;
+    private double predictBalance;
     /**
      * Constructor for objects of class Account
      */
@@ -19,24 +20,49 @@ public class Account
     }
     public Account(char type, double amount){
     }
-    private void deposit(double amount){
+    public void deposit(double amount){
+        if (amount > 0)
+        {
+            balance = balance + amount;
+            System.out.println("true");
+        }
+        else
+        {
+            System.out.println("False");
+        }
     }
+    
     public char getAcctType(){
-        return 0;
+        return acctType;
     }
-    private double getBalance(){
-        return 0;
+    public double getBalance(){
+        return balance;
     }
     public String getId(){
-        return null;
+        return id;
     }
-    private void setBalance(double amount){
+    public void setBalance(double amount){
+        this.balance = amount;
     }
     public void setID(String acctId){
+        this.id = acctId;
     }
-    public void setAcctType(char type){
+    public void setAcctType(char code){
+        this.acctType = code;
     }
     private void withdraw(double amount){
+         predictBalance = balance - amount;
+        
+        
+        if (predictBalance < 0)
+        {
+            System.out.println("false");
+        }
+        else
+        {
+            balance = balance - amount;
+            System.out.println("true");
+        }
     }
     /**
      * An example of a method - replace this comment with your own

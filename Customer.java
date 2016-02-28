@@ -15,6 +15,7 @@ public class Customer
     private String email;
     private String firstName;
     private String lastName;
+    private String cityName;
     private int numberOfCurrentAccounts;
     private String streetAddress;
     private String phoneNumber;
@@ -34,35 +35,47 @@ public class Customer
     }
     
     private String getAddress(){
-        return null;
+        return streetAddress+cityName+zipOrPostalCode;
     }
-    private Account getAccount(){
-        return null;
+    public Account getAccount(){
+        return accounts;
+    }
+    public void setAccount(Account acc){
+        accounts = acc;
     }
     private int getCustomerId(){
-        return 0;
+        return custId;
     }
     private String getEmail(){
-        return null;
+        return email;
     }
-    private String getCustomerName(){
-        return null;
+    public String getCustomerName(){
+        return lastName + "," + firstName;
     }
     public int getNumOfAccounts(){
-        return 0;
+        return numberOfCurrentAccounts;
     }
     private String getPhoneNumber(){
-        return null;
+        return phoneNumber;
     }
     private void setAddress(String street, String city, String code){
+        
+        this.streetAddress = street;
+        this.cityName = city;
+        this.zipOrPostalCode = code;
         
     }
     private void setEmail(String emailAddress){
         
     }
-    private void setCustomerName(String lname, String fname){
+    public void setCustomerName(String lname, String fname){
+        this.firstName = fname;
+        this.lastName = lname;
+        return;
     }
-    private void setPhoneNumber(String phoneNum){
+    public void setPhoneNumber(String phoneNum){
+        this.phoneNumber = phoneNum;
+        return;
     }
     /**
      * An example of a method - replace this comment with your own

@@ -11,7 +11,7 @@ public class Bank
     private static double creditInterestRate;
     private static String closeTime;
     private static double investmentInterestRate; 
-    private static int lastCustID;
+    private static int lastCustID = 1000;
     private static int nextCustID;
     private static String phone;
     private static double premiumInterestRate;
@@ -24,6 +24,7 @@ public class Bank
      * Constructor for objects of class Bank
      */
     public static String getAddress(){
+        
         return null;
     }
     public static double getCreditRate(){
@@ -45,7 +46,9 @@ public class Bank
         return null;
     }
     public static int getNextID(){
-        return 0;
+        nextCustID = lastCustID + 1;
+        lastCustID = lastCustID + 1;
+        return nextCustID;
     }
     public static String getWebsite(){
         return null;
