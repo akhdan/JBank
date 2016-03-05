@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.params=
 comment0.target=Teller()
-comment0.text=\r\n\ metod\ konstruktor\ untuk\ kelas\ customer\r\n
+comment0.text=\r\n\ Method\ constructor\ untuk\ class\ customer.\r\n
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
 numComments=2

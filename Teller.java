@@ -13,35 +13,34 @@ public class Teller
     private Customer c1 = new Customer (); // obyek dari customer
     private Account a1 = new Account (); //obyek dari account
     private String fullname; //string untuk nama lengkap customer pada teller
-    private Account acc; // obyek dari Account
-    private double balance; // jml saldo
+    private Account acct; // obyek dari Account
+    private double saldo; // jml saldo
     
     // instance variables - replace the example below with your own
     /**
-     * metod konstruktor untuk kelas customer
+     * Method constructor untuk class customer.
      */
-    
-    public Teller(){
-        
-        c1.setCustomerName("Sutandi","Sanadhi");
-        fullname = c1.getCustomerName();
-        
-        System.out.println(fullname);
-        
-        a1.setBalance(30000);
-        c1.setAccount(a1);
-        
-        acc = c1.getAccount();
-        balance = acc.getBalance();
-        
-        System.out.println(balance);
-        
+    public Teller()
+    /**
+    * Teller sebagai Method bertipe Constructor
+    */
+    {
+        c1.setName("Sutandi","Sanadhi"); //task 2c number 2
+        a1.setBalance(50000); //task 2c number 5
+        c1.setAccount(a1); //task 2c number 6
+        acct=c1.getAccount();
+        saldo=acct.getBalance();
+        fullname=c1.getName();
+        System.out.println(fullname); //task 2c number 3
+        System.out.println(saldo); //task 2c number 7
     }
     
-    
-    public static void main(String[] args){
-    
+   public static void main(String[] args)
+    {
+        
     }
+}
+
 
     /**
      * Constructor for objects of class Teller
@@ -55,4 +54,4 @@ public class Teller
      * @return     the sum of x and y 
      */
 
-}
+
