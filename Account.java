@@ -1,140 +1,170 @@
 
+import java.lang.Math;
+import java.math.MathContext;
+import java.math.BigDecimal;
+
 /**
- * Write a description of class Account here.
+ * Pemodelan kelas Account yang berisi method dan variabel yang digunakan.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author (Akhdan Hilmy T) 
+ * @version 4
  */
-public class Account
+
+/**
+ * menunjukkan kelas Account
+ */
+public abstract class Account
 {
-    // instance variables - replace the example below with your own
-    /**
-    * Account Class : memanage isi akun customer
+   /**
+    * deklarasi class variable
     */
-    private char acctType;
-    private double balance;
-    private String id;
-    private double predictBalance;
-    
-    /**
-     * Method constructor untuk class customer.
-     */
-    public Account()
-    {
-         this.acctType = 'S' ;
-         this.balance = 10.00;
-        
-    }
-    /**
-    * Constructor Method for Account
-    * @param type untuk tipe akun
-    * @param amount untuk jumlah saldo
+   //public char acctType;
+   //private double drawBalance;
+   protected double balance;
+   protected String id;
+   protected static MathContext mc = new MathContext(5);
+   
+   /**
+    * Constructor Account tanpa parameter
     */
-    public Account(char type, double amount)
+   /*
+   public Account()
     {
-        acctType = type ;
-        amount = balance;
-         
+        acctType = 'S';
+        balance = 10.00;
     }
-    
-    /**
-     * Setter method, melakukan deposit pada sebuah account.
-     * @param amount jumlah deposit yang akan dilakukan.
-     * @return void
-     */
-    public boolean deposit(double amount)
+    */
+   
+   /**
+    * Constructor Account dengan parameter
+    * @param char type menunjukkan tipe akun
+    * @param amount menunjukkan jumlah uang
+    */
+   /*
+   public Account(char type, double amount, Customer customer)
     {
-        if (amount < 0)
+        acctType = type;
+        balance = amount;
+        id = customer.getCustomerId()+ "" +type;
+    }
+   */
+    
+   /**
+    * method untuk mengubah tipe data menjadi String
+    * method toString untuk melakukan overriding untuk mengembalikan ID dari akun
+    */
+   public String toString()
+   {
+       System.out.println("ID           : " +id);
+       //System.out.println("Tipe Akun    : " +acctType);
+       System.out.println("Saldo        : " +balance);
+       return "";
+   }
+   
+   /**
+    * method deposit dengan
+    * @param amount menunjukkan jumlah uang
+    */
+   public boolean deposit(double amount)
+    {
+        if (amount>=0)
         {
-            return false ;
+            balance = balance + amount;
+            return true;
         }
         else
-        {
-            balance = balance + amount; //memodifikasi var balance sehingga balance ditambah amount akan menambah isi saldonya
-            return true;
-        }  
-    }
-    
-    /**
-     * Getter method, return informasi tipe akun.
-     * @return acctType tipe dari akun yang dimaksud, berbentuk char.
-     */
-    public char getAcctType()
-    {
-        return acctType;
-    }
-    
-    /**
-     * Getter method, return informasi saldo.
-     * @return balance jumlah saldo pada suatu akun pelanggan.
-     */
-    public double getBalance()
-    {
-        return balance;
-    }
-    
-    /**
-     * Getter method, return informasi id.
-     * @return id informasi id akun.
-     */
-    public String getId()
-    {
-        return "id" ;
-    }
-    
-    /**
-     * Setter method, mengubah jumlah saldo
-     * @param amount besaran saldo yang akan ditetapkan.
-     * @return void
-     */
-    public void setBalance(double amount)
-    {
-        balance = amount; //melakukan setting balance saldo customer
-    
-    }
-    
-    /**
-     * Setter method, mengubah informasi ID akun.
-     * @param acctId informasi ID yang akan menjadi ID sebuah akun.
-     * @return void
-     */
-    public void setID(String acctId)
-    {
-        id = acctId;// melakukan setting id customer
-    
-    }
-    
-    /**
-    * Mutator Method for setacctType 
-    * @param acctType tipe akun customer
-    */  
-    public void setacctType(char type) 
-    {
-        acctType = type; // melakukan setting tipe akun customer
-    } 
-
-    /**
-    * Mutator Method for withdraw
-    * @param amount jumlah saldo customer
-    */      
-    public boolean withdraw(double amount) 
-    {
-       //Mutator agar customer dapat mengambil saldo miliknya
-        if (balance-amount < 0)
         {
             return false;
         }
+    }
+   
+   /**
+    * method untuk mengembalikan nilai tipe akun
+    */
+   /*
+   public char getAcctType()
+    {
+       return acctType;
+    }
+   */
+    
+   /**
+    * untuk mengembalikan nilai balance
+    */
+   public double getBalance()
+    {
+       return balance;
+    }
+    
+   /**
+    * method untuk mengembalikan id
+    */
+   public String getId()
+    {
+       return id;
+    }
+    
+   /**
+    * method untuk melakukan setting jumlah balance
+    */
+   public void setBalance(double amount)
+    {
+        this.balance = amount;
+    }
+    
+   /**
+    * method untuk melakukan setting id
+    */
+   /*
+   public void setID(String acctId)
+    {
+        id = acctId;
+    }
+   */
+    
+   /**
+    * untuk melakukan setting tipe akun
+    */
+   /*
+   public void setAcctType(char type)
+    {
+        acctType = type;
+    }
+   */
+    
+   /**
+    * method untuk menarik uang
+    */
+   public abstract boolean withdraw(double amount);
+   
+   public static double nilai(double balance, double rate, double compound, double period)
+    {
+         BigDecimal balanceS = new BigDecimal (balance);
+         BigDecimal t = new BigDecimal (rate);
+         BigDecimal n = new BigDecimal (compound);
+         BigDecimal p = new BigDecimal (period);
+         BigDecimal f1Saving = t.divide(n, mc).add(new BigDecimal(1.0));
+         BigDecimal f2 = n.multiply(t, mc);
+         BigDecimal f3Saving = new BigDecimal (Math.pow(f1Saving.doubleValue(), f2.doubleValue()),mc);
+         BigDecimal f4Saving = f3Saving.multiply(balanceS, mc);
+         return f4Saving.doubleValue();
+    }
+   
+   /*
+   public boolean withdraw(double amount) 
+    {
+        double drawBalance;
+        drawBalance = balance - amount;
+        if (drawBalance>=0)
+        {
+            balance = drawBalance;
+            return true;
+        }
         else
         {
-            balance = balance - amount;
-            return true;
-        }  
+            return false;
+        }
     }
-}
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
+    */
 
+}
