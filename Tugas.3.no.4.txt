@@ -1,0 +1,25 @@
+Apa perbedaan antara JavaDoc-format comment, single-line comment, dan
+multi-line comment?
+
+/** JAWABAN TUGAS 3 NOMOR 4 */
+
+/** Perbedaan dasar antara single line comment dan double line comment  */
+/** terletak pada kecocokan sesuai masing-masing programmer             */
+
+/** Pada blueJ, single line comment, tertampilkan dengan tulisan bewarna biru   */
+/** diawali dengan '/**' dan diakhiri tanda sebaliknya, namun hanya dengan satu bintang */
+/** Ketika mengetik suatu comment, untuk membuat baris baru dapat dilakukan dengan menekan enter
+ * (seperti ini)
+ * < bintang di samping kiri dibuat secara otomatis tanpa harus diketikkan ulang */
+/** biasanya single line comment digunakan, bila ingin mendeskripsikan detail suatu method berupa tag */
+/** Tag tersebut terdiri sebagai berikut :
+ * @author : nama dari penulis
+ * @version : versi program
+ * @param : menjelaskan parameter dari suatu constructor atau method
+ * @return : nilai yang dikembalikan pada method
+ * @see : untuk memperlihatkan referensi
+ * dsb
+ */
+
+// Pada double line comment, digunakan untuk meng-comment suatu deskripsi
+// tanpa menjelaskan suatu detail dengan tag seperti pada single line comment 

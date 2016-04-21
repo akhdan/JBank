@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=gui
+comment0.target=ButtonHandler(ATMGUI)
+comment0.text=\r\n\ Kelas\ Konstruktor\ dari\ Button\ Handler\r\n\ \r\n\ @param\ gui\ Objek\ gui\ yang\ akan\ dijadikan\ parameter.\r\n
+comment1.params=e
+comment1.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment1.text=\r\n\ Method\ untuk\ menghandle\ Event\r\n\ \r\n\ @param\ e\ event\ yang\ dilakukan\r\n
+numComments=2

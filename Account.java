@@ -1,170 +1,100 @@
-
-import java.lang.Math;
-import java.math.MathContext;
-import java.math.BigDecimal;
-
 /**
- * Pemodelan kelas Account yang berisi method dan variabel yang digunakan.
+ * Write a description of class Teller here.
  * 
- * @author (Akhdan Hilmy T) 
- * @version 4
- */
-
-/**
- * menunjukkan kelas Account
+  * @author (Akhdan Hilmy Taufiqurrahman) 
+ * @version (14 april 2016)
  */
 public abstract class Account
 {
-   /**
-    * deklarasi class variable
-    */
-   //public char acctType;
-   //private double drawBalance;
-   protected double balance;
-   protected String id;
-   protected static MathContext mc = new MathContext(5);
-   
-   /**
-    * Constructor Account tanpa parameter
-    */
-   /*
-   public Account()
-    {
-        acctType = 'S';
-        balance = 10.00;
-    }
-    */
-   
-   /**
-    * Constructor Account dengan parameter
-    * @param char type menunjukkan tipe akun
-    * @param amount menunjukkan jumlah uang
-    */
-   /*
-   public Account(char type, double amount, Customer customer)
-    {
-        acctType = type;
-        balance = amount;
-        id = customer.getCustomerId()+ "" +type;
-    }
-   */
+    private char acctType;  /**assign variabel acctType */
+    public double balance, checkWithdrawBalance; /**assign variabel balance */
+    public String id;      /**assign variabel id */
     
-   /**
-    * method untuk mengubah tipe data menjadi String
-    * method toString untuk melakukan overriding untuk mengembalikan ID dari akun
-    */
-   public String toString()
-   {
-       System.out.println("ID           : " +id);
-       //System.out.println("Tipe Akun    : " +acctType);
-       System.out.println("Saldo        : " +balance);
-       return "";
-   }
-   
-   /**
-    * method deposit dengan
-    * @param amount menunjukkan jumlah uang
-    */
-   public boolean deposit(double amount)
-    {
-        if (amount>=0)
-        {
-            balance = balance + amount;
-            return true;
-        }
-        else
-        {
+    public Account(){ ///method constructor dari kelas Account 
+        setBalance(1000);
+        setAcctType('L');
+    } 
+    
+    public Account(char type, double amount){
+        setBalance(amount);
+        setAcctType(type);
+    }
+    
+    public Account(Customer cust, char type, double balance){
+        setBalance(balance);
+        setAcctType(type);
+        this.id= Integer.toString(cust.getCustID())+type;
+    }
+    /**method constructor dari kelas Account */
+    
+    public boolean deposit(double amount){
+        if(amount<0){
             return false;
         }
-    }
-   
-   /**
-    * method untuk mengembalikan nilai tipe akun
-    */
-   /*
-   public char getAcctType()
-    {
-       return acctType;
-    }
-   */
-    
-   /**
-    * untuk mengembalikan nilai balance
-    */
-   public double getBalance()
-    {
-       return balance;
+            else if (amount>0|amount!=0){
+                balance=balance + amount;
+                return true;
+            }
+                else{
+                    return false;
+                }
     }
     
-   /**
-    * method untuk mengembalikan id
-    */
-   public String getId()
+    /** untuk mengambil data jenis dari suatu account
+     * @return acctType*/
+    public char getAcctType() 
     {
-       return id;
+        return acctType; //mengembalikan nilai dari atribut acctType pada method
     }
     
-   /**
-    * method untuk melakukan setting jumlah balance
-    */
-   public void setBalance(double amount)
+    /**method accessor untuk mengambil data jumlah saldo
+     * @return balance*/
+    public double getBalance() 
     {
-        this.balance = amount;
+        return balance; //mengembalikan nilai dari atribut balance pada method
     }
     
-   /**
-    * method untuk melakukan setting id
-    */
-   /*
-   public void setID(String acctId)
+    /**method accessor untuk memperoleh data dari suatu ID
+     * @return id*/
+    public String getId() 
     {
-        id = acctId;
+        return id; //mengembalikan nilai dari atribut id pada method
     }
-   */
     
-   /**
-    * untuk melakukan setting tipe akun
-    */
-   /*
-   public void setAcctType(char type)
-    {
-        acctType = type;
-    }
-   */
-    
-   /**
-    * method untuk menarik uang
-    */
-   public abstract boolean withdraw(double amount);
-   
-   public static double nilai(double balance, double rate, double compound, double period)
-    {
-         BigDecimal balanceS = new BigDecimal (balance);
-         BigDecimal t = new BigDecimal (rate);
-         BigDecimal n = new BigDecimal (compound);
-         BigDecimal p = new BigDecimal (period);
-         BigDecimal f1Saving = t.divide(n, mc).add(new BigDecimal(1.0));
-         BigDecimal f2 = n.multiply(t, mc);
-         BigDecimal f3Saving = new BigDecimal (Math.pow(f1Saving.doubleValue(), f2.doubleValue()),mc);
-         BigDecimal f4Saving = f3Saving.multiply(balanceS, mc);
-         return f4Saving.doubleValue();
-    }
-   
-   /*
-   public boolean withdraw(double amount) 
-    {
-        double drawBalance;
-        drawBalance = balance - amount;
-        if (drawBalance>=0)
-        {
-            balance = drawBalance;
-            return true;
+    /**method mutator untuk men-set nilai pada suatu account 
+     * @param amount */
+    public void setBalance(double amount){
+        if(amount>0){
+                balance=amount;
         }
-        else
-        {
+    }
+    
+    /**method mutator untuk men-set suatu ID 
+     * @param acctId*/
+    public void setID(String acctId) 
+    {
+        id = acctId; //men-set nilai dari acctId ke atribut objek id
+    }
+    
+    /** method mutator untuk men-set jenis suatu account
+    *@param type */
+    public void setAcctType(char type){
+         if(type=='S'|type=='O'|type=='L'|type=='I'){
+             acctType = type;
+         }
+    }
+    
+    public boolean withdraw(double amount){
+        checkWithdrawBalance= balance - amount;
+        if (checkWithdrawBalance<0|amount<0){
             return false;
         }
+        else{
+            this.balance=balance-amount;
+            return true;
+        }
     }
-    */
+    
 
+    
 }

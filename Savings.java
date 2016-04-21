@@ -1,70 +1,46 @@
- import java.math.*;
- 
+
 /**
- * Write a description of class Savings here.
+ * Write a description of class Teller here.
  * 
- * @author (Akhdan Hilmy T) 
- * @version 4
+ * @author (Akhdan Hilmy Taufiqurrahman) 
+ * @version (14 april 2016)
  */
 public class Savings extends Account
 {
-    protected double interestEarned;
+    // instance variables - replace the example below with your own
+    public double interestEarned;
 
     /**
      * Constructor for objects of class Savings
      */
-    public Savings(Customer customer, double amount)
+    public Savings(Customer customers, double amount)
     {
         super();
-        balance = amount;
-        id = Integer.toString(customer.getCustomerId());
+        id=customers.getCustID()+"";
+        if(amount>=10){
+            setBalance(amount);
+        
     }
+
     
-    /**
-     * method untuk mendapatkan bunga
-     */
-    public double getInterestEarned()
-    {
-        return interestEarned;
-    }
-    
-    /**
-     * method untuk penarikan uang
-     */
-    public boolean withdraw(double amount)
-    {
-        if(amount > balance)
-        {
-            return false;
-        } 
-        else
-        {
-            balance = balance - amount;
-            return true;
-        }
-    }
-    /*
-    {
-         if(balance-amount >= 10)
-         {
-             balance-=amount;
-             return true;
-         }
-         else
-         {
-             return false;
-         }
-    }
-    */
-    
-    /**
-     * method untuk menambahkan bunga per hari
-     */
-    public void addDailyInterest(int days)
-    {
-        double a = Math.pow(((1 + (.03/365))),(365 * days / 365 ));
-        double b = a * balance;
-        interestEarned = b - balance;
-        balance = b;
-    }
+}
+
+public double getInterestEarned()
+{
+    return interestEarned;
+}
+
+public boolean withdraw (double amount) 
+{
+    return false;
+}
+
+
+public void addDailyInterest (int days) 
+{
+    double f=balance * (Math.pow ((1+(0.03/365)), (days)));
+    this.interestEarned = f-balance;
+    balance = f;
+
+}
 }
