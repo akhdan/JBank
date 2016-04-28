@@ -1,67 +1,35 @@
 
 /**
- * Write a description of class AmountOverDrawnException here.
+ * Berikut ini kelas AmountOverDrawn yang merupakan ekstensi dari kelas exception dimana kelas 
+ * ini berfungsi untuk memberikan pengecualian apabila customer mengambil uang melebihi batas uang 
+ * yang dimiliki.
  * 
-  * @author (Akhdan Hilmy Taufiqurrahman) 
- * @version (14 april 2016)
+ * 
+ * @author Akhdan Hilmy T(1306368500)
+ * @version 23 April 2016
  */
-public class AmountOverDrawnException extends java.lang.Exception
+public class AmountOverDrawnException extends Exception
 {
-    // instance variables - replace the example below with your own
-    private char acctType;
-    public Account akun;
-    public AmountOverDrawnException (Account akun){
-        super ("Insufficient funds");
-        this.akun=akun;
+    public Account acctType;
+
+    public AmountOverDrawnException(Account acct)
+    {
+        super("Insufficeient Funds");
+        acctType = acct;
     }
 
-    /**
-     * Constructor for objects of class AmountOverDrawnException
-     */
-    /*/public AmountOverDrawnException(char acctType)
+    public String getMessage()
     {
-        
-        // initialise instance variables
-    /}
-    
-    /**
-     * Constructor for objects of class AmountOverDrawnException
-     */
-    /*public AmountOverDrawnException(char acctType, double balance, String id)
-    {
-        
-        // initialise instance variables
-        //x = 0;
-    }
-
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    /*public void AmountOverDrawnException(char acctType)
-    {
-        
-        // put your code here
-        //return x + y;
-    }*/
-    
-    public String getMessage(){
-        String messageOut="Error!!!";
-        if(this.akun instanceof Savings && akun instanceof Investment==false){
-            messageOut= "In savings Account";
+        if (acctType instanceof Savings && !(acctType instanceof Investment) ){
+            return super.getMessage() + "in Savings Account";
+        } else if (acctType instanceof Investment){
+            return super.getMessage() + "in Investments Account";
+        } else if (acctType instanceof OverDraftProtection){
+            return super.getMessage() + "in OverDraft Protection Account";
+        } else if (acctType instanceof LineOfCredit){
+            return super.getMessage() + "in LineOfCredit Account";
+        } else {
+            return "Account Type Not Found !";
         }
-        else if (this.akun instanceof Investment && akun instanceof Investment== true){
-            messageOut="In Investment Account";
-        }
-        else if (this.akun instanceof LineOfCredit){
-            messageOut="In Line-Of-Credit Account";
-        }
-        else if (this.akun instanceof OverDraftProtection){
-            messageOut="In Overdraft Protect Account";
-        }
-        return super.getMessage () + messageOut;
     }
 }
-

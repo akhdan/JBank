@@ -1,46 +1,47 @@
 
 /**
- * Write a description of class Teller here.
+ * Kelas Savings yang merupakan perluasan (extend)
+ * dari kelas Account.
  * 
- * @author (Akhdan Hilmy Taufiqurrahman) 
- * @version (14 april 2016)
+ * @author Akhdan Hilmy T(1306368500)
+ * @version 23 April 2016
  */
 public class Savings extends Account
 {
     // instance variables - replace the example below with your own
-    public double interestEarned;
+    protected double interestEarned;
 
     /**
      * Constructor for objects of class Savings
      */
-    public Savings(Customer customers, double amount)
+    public Savings(Customer cust, double amount)
     {
         super();
-        id=customers.getCustID()+"";
-        if(amount>=10){
-            setBalance(amount);
-        
+        id = Integer.toString(cust.getCustID());
+        super.balance = amount;
     }
 
+     public double getInterestEarned() {
+        return interestEarned;
+    }
     
-}
+   public boolean withdraw(double amount) {
+        if (balance - amount >= 10) {
+            balance -= amount;
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public void addDailyInterest(int numOfDays) {
+        double A, period;
+        period = (double)numOfDays / 365;
+        A = futureValue(balance, 0.03, 360, period);
+        interestEarned = A - balance;
+        balance = A;
+    }
+    }
+    
 
-public double getInterestEarned()
-{
-    return interestEarned;
-}
 
-public boolean withdraw (double amount) 
-{
-    return false;
-}
-
-
-public void addDailyInterest (int days) 
-{
-    double f=balance * (Math.pow ((1+(0.03/365)), (days)));
-    this.interestEarned = f-balance;
-    balance = f;
-
-}
-}

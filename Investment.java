@@ -1,85 +1,84 @@
 import java.util.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.text.ParseException;
 
 /**
- * Write a description of class Investment here.
- * 
- * @author (Akhdan Hilmy Taufiqurrahman) 
- * @version (14 april 2016)
+ * Kelas Investment ini merupakan ekstensi dari kelas Savings, dimana kelas Investment ini akan menyimpan akun dengan
+ * tipe penyimpanan jangka panjang
+ * @author Akhdan Hilmy T(1306368500)
+ * @version 23 April 2016
  */
 public final class Investment extends Savings
 {
-    /**
-     * variabel untuk menyimpan data tanggal akhir
-     */
+    // instance variables - replace the example below with your own
     private Date endDate;
-    
-    /**
-     * variabel untuk menyimpan data laju bunga yang didapat
-     */
     private double interestRate;
-    
-    /**
-     * variabel untuk menyimpan data tanggal mulai
-     */
     private Date startDate;
-    
-    /**
-     * variabel untuk menyimpan data jangka waktu tabungan
-     */
     private int term;
 
     /**
      * Constructor for objects of class Investment
      */
-    public Investment(Customer cust, double amount, int months)
+    public Investment(Customer cust, double amount, int term)
     {
         super(cust, amount);
-        if(months>=0 && months<=6){
-            interestRate=0.05;
+        this.term = term;
+        int localTerm;
+        Calendar cal = new GregorianCalendar();
+        startDate = cal.getTime();
+        if (term < 6) {
+            localTerm = 6;
+        } else {
+            localTerm = term;
         }
-        else if(months>=6 && months<=12){
-            term=months;
-            interestRate=0.06;
+        cal.add(Calendar.MONTH, localTerm);
+        endDate = cal.getTime();
+
+        if (term <= 6) {
+            interestRate = 0.05;
+        } else if (term > 6 && term <=12) {
+            interestRate = 0.06;
+        } else {
+            interestRate = 0.07;
         }
-        else if(months>=12){
-            term=months;
-            interestRate=0.07;
-        }
-        Calendar s= new GregorianCalendar();
-        startDate=s.getTime();
-        s.add(Calendar.MONTH, term);
-        endDate =s.getTime();
-        
-        
     }
 
     /**
-     * method untuk melakukan perhitungan bunga 
+     * Metode addDailyInterest berfungsi untuk menghitung bunga total 
+     * yang didapat sesuai dengan banyaknya hari
+     * @param  days sebagai banyaknya hari
      */
     public void addDailyInterest(int days)
     {
-        double f=balance * (Math.pow ((1+(interestRate/365)),(days)));
-        this.interestEarned= f-balance;
-        balance=f;
+        double A, period;
+        period = (double)days / 365;
+        A = futureValue(balance, interestRate, 360, period);
+        interestEarned = A - balance;
+        balance = A;
     }
     
-    
     /**
-     * method untuk melakukan penarikan saldo
+     * Method withdraw digunakan untuk mengambil sejumlah uang dari suatu akun 
+     * @param amount sebagai jumlah nilai uang yang diambil
      */
-    public boolean withdraw(double amount){
-        boolean status=false;
-        if(withdraw(amount)==true){
-            if(Calendar.getInstance().before(endDate)==true){
-                status=true;
+    public boolean withdraw(double amount) {
+        
+        if (balance - amount >= 100) {
+            if (Calendar.getInstance().before(endDate)) {
+                if ( (balance * 0.8) - amount >= 100 ) {
+                    balance *= 0.8;
+                    balance -= amount;
+                    return true;
+                } else {
+                    return false;
+                }
+                
+            } else {
+                return false;
             }
+        } else {
+            return false;
         }
-        else{
-            //do nothing
-         }
-        return status;
-        }
+    }
+    
 }

@@ -1,28 +1,22 @@
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 /**
- * WindowHandler Class, Child dari WindowAdapter
+ * Berikut ini merupakan kelas WindowHandler dengan ekstensi WindowAdapter, yang digunakan 
+ * untuk mengatur window pada kelas ATMGUI
  * 
-  * @author (Akhdan Hilmy Taufiqurrahman) 
- * @version (14 april 2016)
+ * @author Akhdan Hilmy T(1306368500)
+ * @version 23 April 2016
  */
 public class WindowHandler extends WindowAdapter
 {
-    /**
-     * Method untuk mengatur apa yang terjadi jika window ditutup
-     * 
-     * @param w event dari window
-     */
    public void windowClosing(WindowEvent w){
        quitMessage();
        System.exit(0);
    }
    
-   /**
-    * Method untuk mendefinisikan pesan ketika keluar
-    */
    private void quitMessage(){
-       JOptionPane.showMessageDialog(null,"You are exiting, goodbye!");
+       JOptionPane.showMessageDialog(null,"Thank you for your transaction and see you later ! :)");
    }
 }

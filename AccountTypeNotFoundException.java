@@ -1,49 +1,53 @@
 
 /**
- * Write a description of class AccountTypeAlreadyExists here.
+ * Berikut ini kelas AccountTypeNotFound yang merupakan ekstensi dari kelas Exception 
+ * yang berguna untuk memeriksa ketersediaan tipe akun. Apabila tipe akun tidak ditemukan 
+ * maka suatu pesan exception akan ditampilkan. 
  * 
-  * @author (Akhdan Hilmy Taufiqurrahman) 
- * @version (14 april 2016)
+ * @author Akhdan Hilmy T(1306368500) 
+ * @version 23 April 2016
  */
-public class AccountTypeNotFoundException extends java.lang.Exception
+public class AccountTypeNotFoundException extends Exception
 {
-    // instance variables - replace the example below with your own
-    public char akun;
-    public AccountTypeNotFoundException (char akun){
-        super ("Account does not exit");
-        this.akun=akun;
-    }
+    public char acctType;
+    public String message;
+    private Account accountType;
 
-    /**
-     * Constructor for objects of class AccountTypeAlreadyExists
-     */
-    public String getMessage(){
- 
-        String messageOut= "Error!!!";
-        if(this.akun=='S'){
-            messageOut= "Savings";
-        }
-        else if (this.akun=='I'){
-            messageOut="Investment";
-        }
-        else if (this.akun=='L'){
-            messageOut="Line-Of-Credit";
-        }
-        else if (this.akun=='O'){
-            messageOut="Overdraft";
-        }
-        return super.getMessage () + messageOut;
-    }
-
-    /*/**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    /*public void AccountTypeAlreadyExists(char acctType)
+    public AccountTypeNotFoundException(char acct)
     {
-        // put your code here
-        //return x + y;
-    }*/
+        super("Account type does not exist");
+        acctType = acct;
+    }
+
+    public String getMessage()
+    {
+        switch (acctType)
+        {
+            case 'S':
+            {
+                message = "Savings";
+                return message+super.getMessage();
+            }
+            case 'I':
+            {
+                message = " Investment ";
+                return message+super.getMessage();
+            }
+            case 'L':
+            {
+                message = " LineOfCredit ";
+                return message+super.getMessage();
+            }
+            case 'O':
+            {
+                message = " OverDraftProtection ";
+                return message+super.getMessage();
+            }
+            default :
+            {
+                message = "Wrong Type Of Account !";
+                return message;
+            }
+        }
+    }
 }

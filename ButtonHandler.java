@@ -1,53 +1,48 @@
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 /**
- * Kelas untuk mengatur ActionLister dari ATM GUI,
- * Mengimplementasikan Action Listener
+ * Berikut ini merupakan kelas ButtonHandler yang berfungsi
+ * untuk mengatur pengimplementasian ActionLister dari ATM GUI.
  * 
-  * @author (Akhdan Hilmy Taufiqurrahman) 
- * @version (14 april 2016)
+ * @author Akhdan Hilmy T(1306368500)
+ * @version 23 April 2016
  */
 public class ButtonHandler implements ActionListener
 {
-   /**
-    * Variabel untuk menyimpan parameter ATMGUI
-    */
    private ATMGUI gui;
+
+   private String newline = "\n\n";
+
    
    /**
-    * Kelas Konstruktor dari Button Handler
-    * 
-    * @param gui Objek gui yang akan dijadikan parameter.
+    * Constructor untuk kelas Button Handler
+    * @param gui sebagai objek gui yang akan digunakan.
     */
    public ButtonHandler(ATMGUI gui){
        this.gui=gui;
    }
    
    /**
-    * Method untuk menghandle Event
+    * Method actionPerformed yang digunakan untuk memberikan aksi terhadap
+    * input yang dilakukan oleh customer.
     * 
-    * @param e event yang dilakukan
+    * @param event Sebagai event yang sedang dilakukan
     */
-   public void actionPerformed(ActionEvent e){
-       if(e.getActionCommand().equals("Deposit")){
-           gui.setTextArea("Customer: " + gui.getIDcust() +" saves an amount of money: Rp " + gui.getNominal());
+   public void actionPerformed(ActionEvent event){
+       JTextArea text = gui.text;
+       if(event.getActionCommand().equals("Deposit")){
+           text.append(newline + "Customer: " + gui.getIDcostumer() +" saves amount of money:" + gui.getNominal());
        }
-       else if(e.getActionCommand().equals("Withdraw")){
-           gui.setTextArea("Customer: " + gui.getIDcust() +" withdraws an amount of money: Rp " + gui.getNominal());
-           
-           //mengambil label dari button sebagai identitas untuk melihat tombol mana yang ditekan
-           if(Bank.getCustomer(1001).getAccount('S').withdraw(gui.getNominal())==false){
-               JOptionPane.showMessageDialog(null,"Invalid Transaction");
-           }
-           else{
-               Bank.getCustomer(1001).getAccount('S').withdraw(gui.getNominal());
-               JOptionPane.showMessageDialog(null,"Transaction Done");
-           }
-           
+       else if(event.getActionCommand().equals("Withdraw")){
+           text.append(newline + "Customer: " + gui.getIDcostumer() +" withdraws amount of money:" + gui.getNominal());
+       }
+      else if(event.getActionCommand().equals("Exit")){
+           JOptionPane.showMessageDialog(null,"Thank you for your transaction and see you later ! :)");
+            System.exit(0);
         }
-       else{
-           gui.setTextArea("");
-       }
-   }
+    }
 }
+
+      

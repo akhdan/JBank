@@ -4,9 +4,9 @@ Tell the reader (someone who does not know anything about this project)
 all he/she needs to know. The comments should usually include at least:
 ------------------------------------------------------------------------
 
-PROJECT TITLE:			J BANK
+PROJECT TITLE:
 PURPOSE OF PROJECT:
-VERSION or DATE:		27/2/2016
+VERSION or DATE:
 HOW TO START THIS PROJECT:
-AUTHORS:			EVAN BENEDICT ZALUCHU
+AUTHORS:
 USER INSTRUCTIONS:

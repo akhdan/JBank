@@ -1,100 +1,141 @@
+import java.util.*;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.text.*;
+import java.lang.Math;
 /**
- * Write a description of class Teller here.
- * 
-  * @author (Akhdan Hilmy Taufiqurrahman) 
- * @version (14 april 2016)
+ * Kelas Account ini akan berisi informasi mengenai akun customer.
+ * @author Akhdan Hilmy T(1306368500)
+ * @version 23 April 2016
  */
-public abstract class Account
-{
-    private char acctType;  /**assign variabel acctType */
-    public double balance, checkWithdrawBalance; /**assign variabel balance */
-    public String id;      /**assign variabel id */
+
+public abstract class Account   
+    /**
+     * Kerangka Awal Class Account Menggunakan Pemrograman Modular
+     */
     
-    public Account(){ ///method constructor dari kelas Account 
-        setBalance(1000);
-        setAcctType('L');
-    } 
+{   //private char acctType;
+    protected double balance;
+    protected String id;
+    protected static MathContext mc = new MathContext(3);
     
-    public Account(char type, double amount){
-        setBalance(amount);
-        setAcctType(type);
-    }
+    /**
+     * Constructor (pembangun kelas Account)
+     */
+   /*public Account(String ID, double amount) {
+        balance = amount;
+        id = ID;
+    }*/
     
-    public Account(Customer cust, char type, double balance){
-        setBalance(balance);
-        setAcctType(type);
-        this.id= Integer.toString(cust.getCustID())+type;
-    }
-    /**method constructor dari kelas Account */
+    /**
+     * Metode pada constructor kelas Account
+     * @param type sebagai tipe akun customer
+     * @param amount sebagai nilai saldo customer
+     */
+    /*public Account(char type, double amount) {
+          //acctType = type; 
+          balance = amount;}*/
     
-    public boolean deposit(double amount){
-        if(amount<0){
-            return false;
+     public String toString() {
+        //System.out.println("Account Type  :   " + acctType);
+        //if (this.getClass().equals())
+        if ( this instanceof Savings && !(this instanceof Investment)) {
+            System.out.println("SAVING");
+        } else if ( this instanceof LineOfCredit) {
+            LineOfCredit l = (LineOfCredit)this;
+            System.out.println("Line Of Credit");
+            System.out.println("Credit Balance:   "+ l.getCreditBalance());
+            System.out.println("Monthly Fee   :   "+ l.getMonthlyFee());
+        } else if ( this instanceof OverDraftProtection) {
+            OverDraftProtection o = (OverDraftProtection)this;
+            System.out.println("Overdraft Protection");
+            System.out.println("Monthly Fee   :   "+ o.getMonthlyFee());
+        } else if ( this instanceof Investment) {
+            System.out.println("Investment");
         }
-            else if (amount>0|amount!=0){
-                balance=balance + amount;
-                return true;
-            }
-                else{
-                    return false;
-                }
+        System.out.println("Balance       :   " + balance);
+        return "";
     }
     
-    /** untuk mengambil data jenis dari suatu account
-     * @return acctType*/
-    public char getAcctType() 
+     /**
+     * metode untuk deposit customer
+     * @param amount nilai saldo akun customer 
+     */
+    public boolean deposite(double amount)
     {
-        return acctType; //mengembalikan nilai dari atribut acctType pada method
-    }
-    
-    /**method accessor untuk mengambil data jumlah saldo
-     * @return balance*/
-    public double getBalance() 
-    {
-        return balance; //mengembalikan nilai dari atribut balance pada method
-    }
-    
-    /**method accessor untuk memperoleh data dari suatu ID
-     * @return id*/
-    public String getId() 
-    {
-        return id; //mengembalikan nilai dari atribut id pada method
-    }
-    
-    /**method mutator untuk men-set nilai pada suatu account 
-     * @param amount */
-    public void setBalance(double amount){
-        if(amount>0){
-                balance=amount;
+        if (amount < 0)
+        { //mengecek deposit customer apakah kurang dari 0
+            return false; //apabila kurang dari 0 maka berada pada kondisi false
         }
-    }
-    
-    /**method mutator untuk men-set suatu ID 
-     * @param acctId*/
-    public void setID(String acctId) 
-    {
-        id = acctId; //men-set nilai dari acctId ke atribut objek id
-    }
-    
-    /** method mutator untuk men-set jenis suatu account
-    *@param type */
-    public void setAcctType(char type){
-         if(type=='S'|type=='O'|type=='L'|type=='I'){
-             acctType = type;
-         }
-    }
-    
-    public boolean withdraw(double amount){
-        checkWithdrawBalance= balance - amount;
-        if (checkWithdrawBalance<0|amount<0){
-            return false;
-        }
-        else{
-            this.balance=balance-amount;
-            return true;
+        else
+        { //Apabila deposit customer lebih dari 0
+            balance += amount;// menambahkan uang deposit customer
+            return true; // berada pada kondisi true
         }
     }
+    
+     public static double futureValue(double balance, double rate, double compound, double period) 
+    {
+        BigDecimal bal = new BigDecimal (balance);
+        BigDecimal r = new BigDecimal (rate);
+        BigDecimal n = new BigDecimal (compound);
+        BigDecimal t = new BigDecimal (period);
+        BigDecimal f1 = r.divide(n, mc.DECIMAL32).add(new BigDecimal(1));
+        BigDecimal f2 = n.multiply(t, mc.DECIMAL32);
+        BigDecimal f3 = new BigDecimal (Math.pow(f1.doubleValue(), f2.doubleValue()),mc.DECIMAL32);
+        BigDecimal f4 = f3.multiply(bal, mc.DECIMAL32);
+        return f4.doubleValue();
+    }
+    
+    /**
+     * Metode untuk mendapatkan tipe akun customer
+     * @return acctType sebagai tipe akun customer
+     */
+    //public String getAcctType() {
+       //return acctType;}
+    
+    
+     /** 
+     * Metode untuk mendapatkan nilai balance (saldo) customer
+     * @return balance sebagai nilai balance
+     */
+    public double getBalance() {
+        return balance;
+    }
+    
+    /**
+     * Metode untuk mendapatkan Id Customer
+     * @return nomor id customer
+     */
+    public String getId() {
+        return id;}
+    
+    /**
+     * Metode untuk mengatur balance customer
+     * @param amount nilai balance customer
+     */
+    public void setBalance(double amount) {
+        balance = amount; }
+        
+    /**
+     * Metode untuk mengatur id customer
+     * @param acctId sebagai id dari akun customer
+     */    
+    //public void setID(String acctId) {
+        //this.id = acctId; }
+        
+    /**
+     * Metode untuk mengatur tipe akun customer
+     * @param type sebagai tipe akun customer
+     */    
+    //public void setAcctType(char type) {
+        //this.acctType = type; }
+        
+    /**
+     * method untuk customer mengambil uang
+     */
+    public abstract boolean withdraw (double amount);
+   
+}
     
 
-    
-}
