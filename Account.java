@@ -1,129 +1,136 @@
 
 /**
- * Write a description of class Account here.
+ * kelas account berisikan deskripsi atau informasi akun customer
  * 
- * @author (Akhdan Hilmy T)  
- * @version (a version number or a date)
+ * @author (Akhdan Hilmy T) 
+ * @version 
  */
 public class Account
 {
-   /**
-    * deklarasi class variable
-    */
-   public char acctType;
-   public static double balance;
-   private double drawBalance;
-   public String id;
+    private char acctType;
+    private double balance;
+    private String id;
    
-   /**
-    * Constructor Account tanpa parameter
-    */
-   public Account()
-    {
-        acctType = 'S';
-        balance = 10.00;
-    }
-    
-   /**
-    * Constructor Account dengan parameter
-    * @param char type menunjukkan tipe akun
-    * @param amount menunjukkan jumlah uang
-    */
-   public Account(char type, double amount)
-    {
-        acctType = type;
-        balance = amount;
-    }
-   
-   /**
-    * method deposit dengan
-    * @param amount menunjukkan jumlah uang
-    */
-   public boolean deposit(double amount)
-    {
-        if (amount>=0)
-        {
-            balance = balance + amount;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-   
-   /**
-    * method untuk mengembalikan nilai tipe akun
-    */
-   public char getAcctType()
-    {
-       return acctType;
-    }
-   
-   /**
-    * untuk mengembalikan nilai balance
-    */
-   public double getBalance()
-    {
-       return balance;
-    }
-    
-   /**
-    * method untuk mengembalikan id
-    */
-   public String getId()
-    {
-       return id;
-    }
-    
-   /**
-    * method untuk melakukan setting jumlah balance
-    */
-   public void setBalance(double amount)
-    {
-        balance = amount;
-    }
-    
-   /**
-    * method untuk melakukan setting id
-    */
-   public void setID(String acctId)
-    {
-        id = acctId;
-    }
-    
-   /**
-    * untuk melakukan setting tipe akun
-    */ 
-   public void setAcctType(char type)
-    {
-        acctType = type;
-    }
-    
-   /**
-    * method untuk menarik uang
-    */
-   public boolean withdraw(double amount)
-    {
-        double drawBalance;
-        drawBalance = balance - amount;
-        if (drawBalance>=0)
-        {
-            balance = drawBalance;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-}
-
 
    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+     * constructur kelass account
      */
-
+    public Account(Customer customer,double amount,char tipe)
+    {
+        acctType = tipe;
+        balance = amount;
+        id = customer.getCustID()+" "+ tipe;
+    }
+    
+    public String toString()
+    {
+      System.out.println("Tipe Akun = "+acctType);
+      System.out.println("ID = "+id);
+      System.out.println("Saldo = "+balance);
+      return "";  
+    }
+    
+    /**
+     * method pada costractor account
+     * @param type tipe akun customer
+     * @param amount nilai balance customer 
+     */
+    public Account (char type, double amount)
+    {
+      acctType = type;
+      balance = amount;
+    }
+   
+    /**
+     * method untuk deposit customer
+     * @param amount nilai balance akun customer 
+     */
+    public boolean deposit(double amount)
+    {
+        if (amount < 0)
+        { //cek deposit customer apakah kurang dari 0
+            return false;
+        }
+        else
+        { //deposit customer lebih dari 0
+            balance = balance + amount;// menambhakan uang deposit
+            return true;
+        }
+    }
+    
+    
+    /**
+     * method untuk mendapatkan tipe akun customer
+     * @return tipe akun
+     */
+    public char getAcctType()
+    {
+        return acctType;
+    }
+    
+    /**
+     * method untuk mendapatkan nilai balance customer
+     * @return nilai balance
+     */
+    public double getBalance()
+    {
+        return balance;
+    }
+    
+    /**
+     * method untuk mendapatkan ID customer
+     * @return no id customer
+     */
+    public String getId()
+    {
+        return id;
+    }
+    
+    /**
+     * method untuk assign nilai balance customer
+     * @param amount nilai deposit customer
+     */
+    public void setBalance (double amount)
+    {
+        this.balance = amount;
+    }
+    
+    /*
+    /**
+     * method untuk assign ID customer
+     * @param accId ID dari akun 
+     */
+    /*
+    public void setID (String acctId)
+    {
+        this.id = acctId;
+    }
+    */
+   
+    /**
+     * method untuk assign tipe akun customer
+     * @param type tipe akun
+     */
+    public void setAcctType(char type)
+    {
+        this.acctType = type;
+    }
+    
+    /**
+     * method untuk customer mengambil uang
+     */
+    public boolean withdraw (double amount)
+    {
+        if (balance - amount < 0)//cek nilai withdraw apakah akan menghasilkan deposit yang negatif
+        {
+            return false;
+        } 
+        else 
+        {//mengurangi balance saat withdraw
+            balance = balance - amount;
+            return true;
+        }
+    }
+    
+}
+    
