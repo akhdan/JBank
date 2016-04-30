@@ -5,30 +5,21 @@
  * @author (Akhdan Hilmy T) 
  * @version 
  */
-public class Account
+
+
+public class abstract Account
 {
-    private char acctType;
+    
     private double balance;
     private String id;
+    
+    public abstract double withdraw(double account);
    
 
    /**
      * constructur kelass account
      */
-    public Account(Customer customer,double amount,char tipe)
-    {
-        acctType = tipe;
-        balance = amount;
-        id = customer.getCustID()+" "+ tipe;
-    }
-    
-    public String toString()
-    {
-      System.out.println("Tipe Akun = "+acctType);
-      System.out.println("ID = "+id);
-      System.out.println("Saldo = "+balance);
-      return "";  
-    }
+   
     
     /**
      * method pada costractor account
@@ -63,10 +54,7 @@ public class Account
      * method untuk mendapatkan tipe akun customer
      * @return tipe akun
      */
-    public char getAcctType()
-    {
-        return acctType;
-    }
+    
     
     /**
      * method untuk mendapatkan nilai balance customer
@@ -95,26 +83,17 @@ public class Account
         this.balance = amount;
     }
     
-    /*
+  
     /**
      * method untuk assign ID customer
      * @param accId ID dari akun 
      */
-    /*
-    public void setID (String acctId)
-    {
-        this.id = acctId;
-    }
-    */
    
     /**
      * method untuk assign tipe akun customer
      * @param type tipe akun
      */
-    public void setAcctType(char type)
-    {
-        this.acctType = type;
-    }
+   
     
     /**
      * method untuk customer mengambil uang
@@ -131,6 +110,7 @@ public class Account
             return true;
         }
     }
-    
+
+   
 }
     
